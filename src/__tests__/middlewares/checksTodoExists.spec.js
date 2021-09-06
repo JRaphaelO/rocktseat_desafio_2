@@ -88,25 +88,29 @@ describe('checksTodoExists', () => {
     expect(mockNext).toBeCalled();
   });
 
-  it('should not be able to put user and todo in request when user does not exists', () => {
+  it("should not be able to put user and todo in request when user does not exists", () => {
     const todo = {
       id: v4(),
-      title: 'bip bip',
+      title: "bip bip",
       deadline: new Date(),
       done: false,
-      created_at: new Date()
-    }
+      created_at: new Date(),
+    };
 
     const mockRequest = request({
-      headers: { username: 'atlas' },
-      params: { id: todo.id }
+      headers: { username: "atlas" },
+      params: { id: todo.id },
     });
 
-    const mockTodoSetter = jest.fn((todoData) => { this.todo = todoData });
-    const mockUserSetter = jest.fn((userData) => { this.user = userData });
+    const mockTodoSetter = jest.fn((todoData) => {
+      this.todo = todoData;
+    });
+    const mockUserSetter = jest.fn((userData) => {
+      this.user = userData;
+    });
 
-    mockRequest.__defineSetter__('todo', mockTodoSetter);
-    mockRequest.__defineSetter__('user', mockUserSetter);
+    mockRequest.__defineSetter__("todo", mockTodoSetter);
+    mockRequest.__defineSetter__("user", mockUserSetter);
 
     const mockResponse = response();
 
@@ -120,25 +124,29 @@ describe('checksTodoExists', () => {
     expect(mockNext).not.toBeCalled();
   });
 
-  it('should not be able to put user and todo in request when todo id is not uuid', () => {
+  it("should not be able to put user and todo in request when todo id is not uuid", () => {
     users.push({
       id: v4(),
-      name: 'Atlas',
-      username: 'atlas',
+      name: "Atlas",
+      username: "atlas",
       pro: false,
-      todos: []
+      todos: [],
     });
 
     const mockRequest = request({
-      headers: { username: 'atlas' },
-      params: { id: 'invalid-id' }
+      headers: { username: "atlas" },
+      params: { id: "invalid-id" },
     });
 
-    const mockTodoSetter = jest.fn((todoData) => { this.todo = todoData });
-    const mockUserSetter = jest.fn((userData) => { this.user = userData });
+    const mockTodoSetter = jest.fn((todoData) => {
+      this.todo = todoData;
+    });
+    const mockUserSetter = jest.fn((userData) => {
+      this.user = userData;
+    });
 
-    mockRequest.__defineSetter__('todo', mockTodoSetter);
-    mockRequest.__defineSetter__('user', mockUserSetter);
+    mockRequest.__defineSetter__("todo", mockTodoSetter);
+    mockRequest.__defineSetter__("user", mockUserSetter);
 
     const mockResponse = response();
 
